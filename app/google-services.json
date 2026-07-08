@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "770518308078",
+    "project_id": "nexguard-b673a",
+    "storage_bucket": "nexguard-b673a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770518308078:android:8101e686b2a9bb07438fff",
+        "android_client_info": {
+          "package_name": "com.example.nexguard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfV3N0HdpC86NNUSPdPrpT2BfFlw0DxQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
