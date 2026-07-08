@@ -12,7 +12,20 @@
           "package_name": "com.example.nexguard"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "770518308078-cbjefdn0n42pnmalm1cq7m8fj1b531le.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nexguard",
+            "certificate_hash": "da37c23b59b0ce43df473a70ad9738e0837c46fd"
+          }
+        },
+        {
+          "client_id": "770518308078-0qlg8um8r9itca1s9gkqmbmdd17h6jpm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAfV3N0HdpC86NNUSPdPrpT2BfFlw0DxQE"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770518308078-0qlg8um8r9itca1s9gkqmbmdd17h6jpm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
