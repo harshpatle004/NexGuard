@@ -1,0 +1,27 @@
+name: NexGuard Android CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get NexGuard code
+        uses: actions/checkout@v4
+
+
+      - name : Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version : "17"
+
+      - name : Give gradle permision
+        run : chmod +x gradlew
+
+      - name : Build NexGuard
+        run : ./gradlew assembleDebug

@@ -11,7 +11,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.nexguard.feature.auth.presentation.AuthViewModel
 import com.example.nexguard.feature.auth.presentation.LoginScreen
 import com.example.nexguard.feature.auth.presentation.RegisterScreen
+import com.example.nexguard.feature.camera.presentation.CameraScreen
 import com.example.nexguard.feature.home.presentation.HomeScreen
+import com.example.nexguard.feature.monitor.presentation.MonitorScreen
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.compose.LocalLifecycleOwner
 
 @Composable
 fun AppNavigation() {
@@ -34,13 +42,20 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "login"
+        startDestination = "home"
     ) {
 
 
 
         composable("home") {
-            HomeScreen()
+            HomeScreen(
+                onCameraClick = {
+                    navController.navigate("cameraScreen")
+                },
+                onMonitorClick = {
+                    navController.navigate("monitorScreen")
+                }
+            )
         }
 
         composable("login") {
@@ -60,5 +75,14 @@ fun AppNavigation() {
                 }
             )
         }
+
+        composable("cameraScreen"){
+                CameraScreen()
+        }
+
+        composable("monitorScreen"){
+            MonitorScreen()
+        }
     }
 }
+
