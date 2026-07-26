@@ -50,6 +50,8 @@ android {
 
 dependencies {
 
+
+
     // ----------------------------
     // Core Android
     // ----------------------------
@@ -61,6 +63,7 @@ dependencies {
     // Compose
     // ----------------------------
     implementation(platform("androidx.compose:compose-bom:2025.06.00"))
+    implementation("androidx.compose.material:material-icons-extended")
     androidTestImplementation(platform("androidx.compose:compose-bom:2025.06.00"))
 
     implementation("androidx.compose.ui:ui")
