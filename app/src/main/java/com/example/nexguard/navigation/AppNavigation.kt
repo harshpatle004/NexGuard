@@ -20,6 +20,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.example.nexguard.feature.monitor.presentation.MonitorViewModel
 
 @Composable
 fun AppNavigation() {
@@ -44,7 +45,6 @@ fun AppNavigation() {
         navController = navController,
         startDestination = "home"
     ) {
-
 
 
         composable("home") {
@@ -76,12 +76,14 @@ fun AppNavigation() {
             )
         }
 
-        composable("cameraScreen"){
-                CameraScreen()
+        composable("cameraScreen") {
+            CameraScreen()
         }
 
-        composable("monitorScreen"){
-            MonitorScreen()
+        composable("monitorScreen") {
+            val monitorViewModel: MonitorViewModel = viewModel()
+
+            MonitorScreen(viewModel = monitorViewModel)
         }
     }
 }

@@ -131,6 +131,10 @@ fun CameraScreen() {
                 override fun onIceCandidate(
                     candidate: IceCandidate
                 ) {
+                    android.util.Log.d(
+                        "NEXGUARD",
+                        "Local ICE candidate: ${candidate.sdp}"
+                    )
                 }
 
                 override fun onUserConnected() {
