@@ -9,15 +9,15 @@ interface SignalingListener {
 
     fun onRoomJoined(roomId: String)
 
-    fun onOffer(sessionDescription: SessionDescription)
-
-    fun onAnswer(sessionDescription: SessionDescription)
-
-    fun onIceCandidate(candidate: IceCandidate)
-
     fun onUserConnected()
 
     fun onUserDisconnected()
+
+    fun onOffer(offer: SessionDescription)
+
+    fun onAnswer(answer: SessionDescription)
+
+    fun onIceCandidate(candidate: IceCandidate)
 
     fun onError(message: String)
 }
