@@ -1,11 +1,13 @@
 package com.example.nexguard.core.webrtc
 
 import android.content.Context
+import android.util.Log
 import org.webrtc.*
 
 class PeerConnectionClient(
     private val context: Context,
-    private val listener: PeerConnectionListener
+    private val listener: PeerConnectionListener,
+    private val captureLocalVideo: Boolean = true
 ) {
 
     private val eglBase = EglBaseHolder.eglBase
@@ -33,7 +35,9 @@ class PeerConnectionClient(
 
         createPeerConnection()
 
-        createLocalVideoTrack()
+        if (captureLocalVideo) {
+            createLocalVideoTrack()
+        }
     }
 
     /**
@@ -153,7 +157,10 @@ class PeerConnectionClient(
      */
     fun startLocalPreview(
         renderer: SurfaceViewRenderer
+
     ) {
+
+        if (!::videoTrack.isInitialized) return
 
         renderer.init(
             eglBase.eglBaseContext,
@@ -270,22 +277,19 @@ class PeerConnectionClient(
      * Set remote SDP
      */
     fun setRemoteDescription(
-        sessionDescription: SessionDescription
+        sessionDescription: SessionDescription,
+        onSuccess: (() -> Unit)? = null
     ) {
-
         peerConnection.setRemoteDescription(
             object : SdpObserverAdapter() {
 
                 override fun onSetSuccess() {
-                    // Remote SDP applied successfully
+                    onSuccess?.invoke()
                 }
 
                 override fun onSetFailure(error: String?) {
-                    error?.let {
-                        throw IllegalStateException(it)
-                    }
+                    Log.e("NEXGUARD", "Set remote SDP failed: $error")
                 }
-
             },
             sessionDescription
         )
@@ -356,43 +360,37 @@ class PeerConnectionClient(
      * Release all WebRTC resources.
      */
     fun release() {
+        if (::videoCapturer.isInitialized) {
+            try {
+                videoCapturer.stopCapture()
+            } catch (_: Exception) {
+            }
 
-        try {
-            videoCapturer.stopCapture()
-        } catch (_: Exception) {
-        }
-
-        try {
             videoCapturer.dispose()
-        } catch (_: Exception) {
         }
 
-        try {
+        if (::surfaceTextureHelper.isInitialized) {
             surfaceTextureHelper.dispose()
-        } catch (_: Exception) {
         }
 
-        try {
+        if (::videoSource.isInitialized) {
             videoSource.dispose()
-        } catch (_: Exception) {
         }
 
-        try {
+        if (::videoTrack.isInitialized) {
             videoTrack.dispose()
-        } catch (_: Exception) {
         }
 
-        try {
+        if (::peerConnection.isInitialized) {
             peerConnection.close()
             peerConnection.dispose()
-        } catch (_: Exception) {
         }
 
-        try {
+        if (::peerConnectionFactory.isInitialized) {
             peerConnectionFactory.dispose()
-        } catch (_: Exception) {
         }
     }
+
 
 
 
